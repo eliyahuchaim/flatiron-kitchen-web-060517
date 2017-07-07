@@ -25,7 +25,8 @@ FlatironKitchen::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-
+  resources :ingredients
+  resources :recipes
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
@@ -39,7 +40,7 @@ FlatironKitchen::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
