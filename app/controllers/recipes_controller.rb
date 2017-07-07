@@ -11,11 +11,11 @@ class RecipesController < ApplicationController
 
     def create
       @recipe = Recipe.create(recipe_params)
-
-      params["ingredient"].each do |k, v|
-        @recipe.ingredients << Ingredient.find(k) if v == "yes"
+      if !params[:recipe][:ingredients].nil?
+        params[:recipe][:ingredients].each do |id|
+          @recipe.ingredients << Ingredient.find(id)
+        end
       end
-      @recipe.save
       redirect_to @recipe
     end
 
@@ -28,6 +28,12 @@ class RecipesController < ApplicationController
     end
 
     def update
+      @recipe.ingredients = []
+      if !params[:recipe][:ingredients].nil?
+        params[:recipe][:ingredients].each do |id|
+          @recipe.ingredients << Ingredient.find(id)
+        end
+      end
       @recipe.update(recipe_params)
       redirect_to @recipe
     end

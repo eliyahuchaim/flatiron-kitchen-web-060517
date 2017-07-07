@@ -1,12 +1,13 @@
 <h1>Recipe Form:</h1>
-<%= form_for(@recipe) do |f| %>
+
+<%=  form_for @recipe do |f| %>
 <%= f.label :name %>:
  <%= f.text_field :name %><br />
+<% if !Ingredient.all.nil? %>
+    <% Ingredient.all.each do |ingredient| %>
+    <p><%=ingredient.name %></p> <%= f.check_box :ingredients, {multiple: true, id: ingredient.name}, ingredient.id, false %>
+    <% end %>
+  <% end  %>
 
- <%= @ingredients.each do |ingredient| %>
- <%= ingredient.name %>
- <%= check_box("ingredient", ingredient.id, {}, "yes", "no") %>
- <%end %>
-
- <%= f.submit %>
-<% end %>
+  <%= f.submit %>
+  <% end  %>
